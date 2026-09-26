@@ -1,0 +1,522 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MARABU BOOK STUDIO</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #09090b;
+    color: white;
+    min-height: 100vh;
+}
+
+button,
+textarea,
+input {
+    font: inherit;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+
+.navbar {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    border-bottom: 1px solid #27272a;
+    background: rgba(9,9,11,.9);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: #a78bfa;
+}
+
+.nav-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-btn {
+    border: 1px solid #3f3f46;
+    background: #18181b;
+    color: white;
+    padding: 9px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #27272a;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1100px;
+    margin: auto;
+    padding: 90px 24px 50px;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    color: #c4b5fd;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 7vw, 78px);
+    line-height: .98;
+    letter-spacing: -4px;
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    color: #a78bfa;
+}
+
+.hero p {
+    max-width: 680px;
+    margin: auto;
+    color: #a1a1aa;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* CREATOR */
+
+.creator {
+    max-width: 900px;
+    margin: 35px auto 90px;
+    padding: 0 24px;
+}
+
+.creator-card {
+    background: #111113;
+    border: 1px solid #27272a;
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 20px 80px rgba(0,0,0,.35);
+}
+
+.creator-title {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+textarea {
+    width: 100%;
+    min-height: 170px;
+    resize: vertical;
+    background: #09090b;
+    color: white;
+    border: 1px solid #3f3f46;
+    border-radius: 15px;
+    padding: 18px;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #8b5cf6;
+}
+
+.creator-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+}
+
+select,
+input {
+    width: 100%;
+    background: #18181b;
+    color: white;
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.generate {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    border: 0;
+    border-radius: 12px;
+    background: #8b5cf6;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.generate:hover {
+    background: #7c3aed;
+}
+
+/* BOOK TYPES */
+
+.types {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 24px 100px;
+}
+
+.types h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.type-card {
+    padding: 22px;
+    background: #111113;
+    border: 1px solid #27272a;
+    border-radius: 16px;
+    transition: .2s;
+}
+
+.type-card:hover {
+    transform: translateY(-3px);
+    border-color: #7c3aed;
+}
+
+.type-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.type-card h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.type-card p {
+    color: #71717a;
+    font-size: 13px;
+}
+
+/* RESULT */
+
+.result {
+    display: none;
+    max-width: 900px;
+    margin: -40px auto 80px;
+    padding: 0 24px;
+}
+
+.result-box {
+    background: #111113;
+    border: 1px solid #3f3f46;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.result-box h2 {
+    margin-bottom: 12px;
+}
+
+.result-box p {
+    color: #a1a1aa;
+    line-height: 1.6;
+}
+
+footer {
+    border-top: 1px solid #27272a;
+    padding: 30px;
+    text-align: center;
+    color: #71717a;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+    .type-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .creator-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .type-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 60px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<nav class="navbar">
+    <div class="logo">
+        MARABU <span>BOOK STUDIO</span>
+    </div>
+
+    <div class="nav-right">
+        <button class="nav-btn" onclick="login()">
+            Login
+        </button>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="badge">
+        ✦ AI BOOK CREATOR
+    </div>
+
+    <h1>
+        Turn an Idea<br>
+        Into a <span>Book.</span>
+    </h1>
+
+    <p>
+        Create stories, novels, manga, comics, journals,
+        educational books and illustrated books from one simple prompt.
+    </p>
+
+</section>
+
+<section class="creator">
+
+    <div class="creator-card">
+
+        <div class="creator-title">
+            What do you want to create?
+        </div>
+
+        <textarea id="idea"
+        placeholder="Example: Create a 30-page mystery manga about three friends who discover a hidden railway station..."></textarea>
+
+        <div class="creator-options">
+
+            <select id="bookType">
+                <option value="auto">✨ Auto Detect</option>
+                <option>Story Book</option>
+                <option>Novel</option>
+                <option>Manga</option>
+                <option>Comic</option>
+                <option>Graphic Novel</option>
+                <option>Journal</option>
+                <option>Educational Book</option>
+                <option>Workbook</option>
+                <option>Poetry</option>
+                <option>Cookbook</option>
+                <option>Travel Book</option>
+                <option>Custom</option>
+            </select>
+
+            <select id="language">
+                <option>English</option>
+                <option>Tamil</option>
+                <option>Hindi</option>
+                <option>Telugu</option>
+                <option>Malayalam</option>
+                <option>Kannada</option>
+                <option>Japanese</option>
+                <option>Spanish</option>
+                <option>French</option>
+            </select>
+
+            <select id="style">
+                <option>Auto Style</option>
+                <option>Cinematic</option>
+                <option>Funny</option>
+                <option>Wholesome</option>
+                <option>Dark</option>
+                <option>Educational</option>
+                <option>Professional</option>
+                <option>Manga</option>
+                <option>Comic</option>
+            </select>
+
+        </div>
+
+        <button class="generate" onclick="generateBook()">
+            ✦ Create My Book
+        </button>
+
+    </div>
+
+</section>
+
+<section class="result" id="result">
+
+    <div class="result-box">
+
+        <h2>📖 Book Blueprint</h2>
+
+        <p id="resultText"></p>
+
+        <br>
+
+        <button class="generate" onclick="alert('AI generation will be connected in the next step.')">
+            Continue to AI Generation
+        </button>
+
+    </div>
+
+</section>
+
+<section class="types">
+
+    <h2>Create Almost Anything</h2>
+
+    <div class="type-grid">
+
+        <div class="type-card">
+            <div class="type-icon">📖</div>
+            <h3>Story Books</h3>
+            <p>Children's stories, fiction and adventures.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">🎌</div>
+            <h3>Manga</h3>
+            <p>Panels, dialogue, characters and pages.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">💬</div>
+            <h3>Comics</h3>
+            <p>Comic pages with panels and speech bubbles.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">🎨</div>
+            <h3>Illustrated Books</h3>
+            <p>Stories combined with AI illustrations.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">📓</div>
+            <h3>Journals</h3>
+            <p>Printable journals, planners and diaries.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">📚</div>
+            <h3>Educational</h3>
+            <p>Study guides, textbooks and workbooks.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">🚀</div>
+            <h3>Fiction</h3>
+            <p>Fantasy, sci-fi, romance, thriller and more.</p>
+        </div>
+
+        <div class="type-card">
+            <div class="type-icon">✨</div>
+            <h3>Custom</h3>
+            <p>Describe your own book format.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 MARABU BOOK STUDIO — Your idea. Your world. Your book.
+</footer>
+
+</div>
+
+<script>
+
+function generateBook() {
+
+    const idea = document.getElementById("idea").value.trim();
+    const type = document.getElementById("bookType").value;
+    const language = document.getElementById("language").value;
+    const style = document.getElementById("style").value;
+
+    if (!idea) {
+        alert("First tell me what book you want to create da 😄");
+        return;
+    }
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("resultText").innerHTML =
+        "<strong>Your idea:</strong> " + escapeHTML(idea) +
+        "<br><br>" +
+        "<strong>Book type:</strong> " + escapeHTML(type) +
+        "<br>" +
+        "<strong>Language:</strong> " + escapeHTML(language) +
+        "<br>" +
+        "<strong>Style:</strong> " + escapeHTML(style) +
+        "<br><br>" +
+        "✨ Your idea is ready for the AI book planner.";
+
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function login() {
+    alert(
+        "YouTube subscription login will be connected in the next step."
+    );
+}
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+</script>
+
+</body>
+</html>
+```
